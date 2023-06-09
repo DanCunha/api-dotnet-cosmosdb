@@ -26,7 +26,7 @@ namespace ChallengeAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChallengeAPI", Version = "v1" });
             });
-
+            services.AddAutoMapper(typeof(Startup));    
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddScoped<ChallengeContext>();
