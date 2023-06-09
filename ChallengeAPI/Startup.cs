@@ -1,4 +1,5 @@
-﻿using ChallengeAPI.Context;
+﻿using ChallengeAPI.AzureServices;
+using ChallengeAPI.Context;
 using ChallengeAPI.Repository;
 using ChallengeAPI.Repository.Interfaces;
 using ChallengeAPI.Service;
@@ -29,6 +30,7 @@ namespace ChallengeAPI
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddScoped<ChallengeContext>();
+            services.AddScoped<ProductQueue>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

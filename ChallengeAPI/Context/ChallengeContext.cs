@@ -9,9 +9,8 @@ namespace ChallengeAPI.Context
         private Container container;
         private string dataBaseId = "Company";
         private string containerId = "Products";
-        private static readonly string accountEndpoint = "https://664a7b32-0ee0-4-231-b9ee.documents.azure.com:443/";
-        private static readonly string accountKey = "MwKCKKknXorCF0S2aE9RhC3aF9jL4UeTF6DLPSM4xZiI1dwiioB6j4fPEpXkiDWT601SZbkQS40VACDbeUVBFg==";
-
+        private static readonly string accountEndpoint = "https://challenge-db.documents.azure.com:443/";
+        private string? accountKey = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_KEY");
 
         public async Task<Container> GetContainer() 
         {
