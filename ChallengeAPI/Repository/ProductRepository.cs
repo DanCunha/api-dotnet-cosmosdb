@@ -44,5 +44,18 @@ namespace ChallengeAPI.Repository
 
             return productResponse;
         }
+
+        public async Task<Product> UpdateItemAsync(Product product)
+        {
+            var container = await _context.GetContainer();
+            ItemResponse<Product> productResponse = await container.ReadItemAsync<Product>(product.Id, new PartitionKey(product.PartitionKey));
+            var itemBody = productResponse.Resource;
+
+            // replace the item with the updated content
+            productResponse = await container.ReplaceItemAsync<Product>(itemBody, itemBody.Id, new PartitionKey(itemBody.PartitionKey));
+            Console.WriteLine("Updated Family [{0},{1}].\n \tBody is now: {2}\n", itemBody.Name, itemBody.Id, productResponse.Resource);
+
+            return productResponse;
+        }
     }
 }

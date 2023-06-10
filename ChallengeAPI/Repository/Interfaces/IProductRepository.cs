@@ -7,7 +7,7 @@ namespace ChallengeAPI.Repository.Interfaces
     {
         Task<IEnumerable<Product>> GetProductsAsync();
         Task<Product> GetProductByIdAsync(int id);
-
         Task<Product> CreateItemAsync(Product product);
+        Task<Product> UpdateItemAsync(Product product);
     }
 }
