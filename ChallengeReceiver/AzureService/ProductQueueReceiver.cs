@@ -2,9 +2,6 @@
 using Azure.Messaging.ServiceBus;
 using ChallengeAPI.Context;
 using ChallengeAPI.Models.Entities;
-using ChallengeAPI.Repository;
-using ChallengeAPI.Repository.Interfaces;
-using ChallengeAPI.Service;
 using Microsoft.Azure.Cosmos;
 using Newtonsoft.Json.Linq;
 using System;

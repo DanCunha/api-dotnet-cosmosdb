@@ -1,10 +1,14 @@
 ﻿using ChallengeAPI.AzureServices;
 using ChallengeAPI.Context;
+using ChallengeAPI.Filters;
 using ChallengeAPI.Repository;
 using ChallengeAPI.Repository.Interfaces;
 using ChallengeAPI.Service;
 using ChallengeAPI.Service.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace ChallengeAPI
 {
@@ -21,7 +25,33 @@ namespace ChallengeAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(cfg =>
+            {
+                cfg.Filters.Add(typeof(ExceptionFilter));
+            });
+            services.AddMvc(options =>
+                options.Filters.Add(typeof(ChallengeActionFilter)));
+        
+
+        var key = Encoding.ASCII.GetBytes(Settings.Settings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChallengeAPI", Version = "v1" });
@@ -47,6 +77,7 @@ namespace ChallengeAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

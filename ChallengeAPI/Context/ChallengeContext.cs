@@ -17,11 +17,10 @@ namespace ChallengeAPI.Context
 
             var client = new CosmosClientBuilder(accountEndpoint, accountKey).Build();
             database = await client.CreateDatabaseIfNotExistsAsync(dataBaseId);
-            Console.WriteLine("Created Database: {0}\n", this.database.Id);
 
             // Create a new container
             this.container = await this.database.CreateContainerIfNotExistsAsync(containerId, "/partitionKey");
-            Console.WriteLine("Created Container: {0}\n", this.container.Id);
+
 
             return container = client.GetContainer(dataBaseId, containerId);
 

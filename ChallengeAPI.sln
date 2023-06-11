@@ -5,10 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengeAPI", "ChallengeAPI\ChallengeAPI.csproj", "{7C279330-14DA-4229-909A-8560CB002986}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeReceiver", "ChallengeReceiver\ChallengeReceiver.csproj", "{1855E36A-5072-466C-93F7-0D7C235031EB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{7C279330-14DA-4229-909A-8560CB002986} = {7C279330-14DA-4229-909A-8560CB002986}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChallengeReceiver", "ChallengeReceiver\ChallengeReceiver.csproj", "{1855E36A-5072-466C-93F7-0D7C235031EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
