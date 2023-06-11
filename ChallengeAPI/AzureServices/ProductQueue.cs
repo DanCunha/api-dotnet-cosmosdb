@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azure.Messaging.ServiceBus;
+using ChallengeAPI.AzureServices.Interfaces;
 using ChallengeAPI.Models.Dtos;
 using ChallengeAPI.Models.Entities;
 using Newtonsoft.Json;
@@ -7,10 +8,8 @@ using System.Text;
 
 namespace ChallengeAPI.AzureServices
 {
-    public class ProductQueue
+    public class ProductQueue : IProductQueue
     {
-        private string? _azureBusConnection = Environment.GetEnvironmentVariable("AZURE_SERVICE_BUS_CONNECTION");
-        private const string _queueName = "challenge-queue";
         private readonly IMapper _mapper;   
 
         public ProductQueue(IMapper mapper)
@@ -22,8 +21,10 @@ namespace ChallengeAPI.AzureServices
         {
             ServiceBusClient client;
             ServiceBusSender sender;
+            var _azureBusConnection = Settings.Settings._azureBusConnection;
+            var _queueName = "challenge-queue";
 
-            var clientOptions = new ServiceBusClientOptions()
+        var clientOptions = new ServiceBusClientOptions()
             {
                 TransportType = ServiceBusTransportType.AmqpWebSockets
             };

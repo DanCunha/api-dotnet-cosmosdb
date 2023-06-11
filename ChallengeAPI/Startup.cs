@@ -1,4 +1,5 @@
 ﻿using ChallengeAPI.AzureServices;
+using ChallengeAPI.AzureServices.Interfaces;
 using ChallengeAPI.Context;
 using ChallengeAPI.Filters;
 using ChallengeAPI.Repository;
@@ -59,6 +60,7 @@ namespace ChallengeAPI
             services.AddAutoMapper(typeof(Startup));    
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductQueue, ProductQueue>();
             services.AddScoped<ChallengeContext>();
             services.AddScoped<ProductQueue>();
         }

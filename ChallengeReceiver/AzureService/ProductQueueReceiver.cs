@@ -64,7 +64,7 @@ namespace ChallengeReceiver.AzureService
             Product product = new Product()
             {
                 Id = JObject.Parse(body)["Id"].ToString(),
-                PartitionKey = "Product",
+                PartitionKey = JObject.Parse(body)["PartitionKey"].ToString(),
                 Status = true
             };
 

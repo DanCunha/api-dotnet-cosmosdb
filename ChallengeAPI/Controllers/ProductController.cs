@@ -27,8 +27,8 @@ namespace ChallengeAPI.Controllers
         [Authorize(Roles ="manager")]
         public async Task<IActionResult> SaveAsync([FromBody] Product product)
         {
-            await _productService.SaveAsync(product);
-            return Created("", product);
+            Product response = await _productService.SaveAsync(product);
+            return Created("", response);
         }
     }
 }
